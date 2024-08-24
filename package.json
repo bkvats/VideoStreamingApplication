@@ -1,0 +1,20 @@
+{
+  "name": "megaproject",
+  "version": "1.0.0",
+  "description": "A Video Streaming Platform like youtube",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "reactjs",
+    "nodejs",
+    "backend",
+    "frontend",
+    "full",
+    "stack"
+  ],
+  "author": "Bhupender Kr. Sharma",
+  "license": "ISC"
+}
