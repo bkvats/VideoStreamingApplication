@@ -1,11 +1,11 @@
 {
   "name": "megaproject",
   "version": "1.0.0",
-  "description": "A Video Streaming Platform like youtube",
+  "description": "A Video Streaming Platform like Youtube",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "javascript",
@@ -13,12 +13,16 @@
     "nodejs",
     "backend",
     "frontend",
-    "full",
-    "stack"
+    "full-stack"
   ],
   "author": "Bhupender Kr. Sharma",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.4"
   }
 }
