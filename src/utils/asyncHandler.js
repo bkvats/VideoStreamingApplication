@@ -1,5 +1,5 @@
 export default function asyncHandler(requestHandler) {
     return (req, res, next) => {
-        Promise.resolve(requestHandler(req, res, next)).catch((error) => next(error));
+        Promise.resolve(requestHandler(req, res)).catch((error) => {next(error)});
     }
 }
