@@ -9,7 +9,8 @@ export default async function uploadOnCloudinary(localFilePath) {
     try {
         if (localFilePath) {
             const result = await cloudniary.uploader.upload(localFilePath, {resource_type: "auto"});
-            console.log("FILE SUCCESFULLY UPLOADED ON CLOUDINARY AT:", result.url);
+            fs.unlinkSync(localFilePath);
+            return result;
         }
     } catch (error) {
         fs.unlinkSync(localFilePath);
