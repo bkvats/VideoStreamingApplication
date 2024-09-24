@@ -124,4 +124,58 @@ const updateCoverImage = asyncHandler(async (req, res) => {
     }, {new: true}).select("-password -refreshToken");
     res.status(200).json(new ApiResponse(200, user, "Cover Image Uploaded successfully"));
 });
-export { registerUser, userLogin, userLogout, refreshAccessToken };
+const getUserChannelProfile = asyncHandler(async (req, res) => {
+    const {userName} = req.params;
+    if (!userName?.trim()) throw new ApiError(400, "Username is missing");
+    const channel = await User.aggregate([
+        {
+            $match: userName.toLowerCase()
+        },
+        {
+            $lookup: {
+                from: "subscriptions",
+                localField: "_id",
+                foreignField: "channel",
+                as: "subscribers"
+            }
+        },
+        {
+            $lookup: {
+                from: "subscriptions",
+                localField: "_id",
+                foreignField: "subscriber",
+                as: "subscribedTo"
+            }
+        },
+        {
+            $addFields: {
+                subscribersCount: {
+                    $size: "subscribers"
+                },
+                subscribedToCount: {
+                    $size: "subscribedTo"
+                },
+                isSubscribed: {
+                    if: {$in: [req.user?._id, "$subscribers.subscriber"]},
+                    then: true,
+                    else: false
+                }
+            }
+        },
+        {
+            $project: {
+                fullName: 1,
+                email: 1,
+                userName: 1,
+                avatar: 1,
+                coverImage: 1,
+                subscribersCount: 1,
+                subscribedToCount: 1,
+                isSubscribed: 1
+            }
+        }
+    ]);
+    if (!channel?.length) throw new ApiError(404, "Channel not found");
+    res.status(200).json(new ApiResponse(200, channel[0], "channel found successfully"));
+})
+export { registerUser, userLogin, userLogout, refreshAccessToken, changePassword, getCurrentUser, updateAccountDetails, updateAvatar, updateCoverImage };
