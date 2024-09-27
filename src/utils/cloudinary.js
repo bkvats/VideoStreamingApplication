@@ -9,10 +9,10 @@ export default async function uploadOnCloudinary(localFilePath) {
     try {
         if (localFilePath) {
             const result = await cloudniary.uploader.upload(localFilePath, {resource_type: "auto"});
-            fs.unlinkSync(localFilePath);
+            await fs.unlinkSync(localFilePath);
             return result;
         }
     } catch (error) {
-        fs.unlinkSync(localFilePath);
+        await fs.unlinkSync(localFilePath);
     }
 }
