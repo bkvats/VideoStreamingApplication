@@ -23,6 +23,6 @@ userRouter.route("/current-user").get(verifyJWT, getCurrentUser);
 userRouter.route("/update-details").patch(verifyJWT, updateAccountDetails);
 userRouter.route("/change-avatar").patch(verifyJWT, upload.single("avatar"), updateAvatar);
 userRouter.route("/change-coverImage").patch(verifyJWT, upload.single("coverImage"), updateCoverImage);
-userRouter.route("/channel/:userName").get(verifyJWT, getUserChannelProfile);
+userRouter.route("/channel/:userName").get(getUserChannelProfile);
 userRouter.route("/watchHistory").get(verifyJWT, getUserWatchHistory);
 export default userRouter;

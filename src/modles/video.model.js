@@ -30,10 +30,10 @@ const videoSchema = new mongoose.Schema({
         default: 0
     },
     isPublished: {
-        type: boolean,
+        type: Boolean,
         required: true,
         default: true
     }
 }, {timestamps: true});
 videoSchema.plugin(mongooseAggregatePaginate);
-export default Video = mongoose.Model("Video", videoSchema);
+export const Video = mongoose.model("Video", videoSchema);
